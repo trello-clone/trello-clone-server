@@ -29,6 +29,7 @@ export type Card = {
   _id: Scalars['ID'];
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  members?: Maybe<Array<Maybe<Scalars['ID']>>>;
   _created: Scalars['DateTime'];
   _changed: Scalars['DateTime'];
 };
@@ -327,6 +328,7 @@ export type CardResolvers<ContextType = any, ParentType extends ResolversParentT
   _id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
+  members?: Resolver<Maybe<Array<Maybe<ResolversTypes['ID']>>>, ParentType, ContextType>,
   _created?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>,
   _changed?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,

@@ -75,6 +75,7 @@ type Card {
     _id: ID!
     title: String!
     description: String
+    members: [ID]
     _created: DateTime!
     _changed: DateTime!
 }
