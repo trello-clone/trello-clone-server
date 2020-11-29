@@ -38,6 +38,7 @@ export type CardInput = {
   _id: Scalars['ID'];
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  members?: Maybe<Array<Maybe<Scalars['ID']>>>;
   _created?: Maybe<Scalars['DateTime']>;
   _changed?: Maybe<Scalars['DateTime']>;
 };
@@ -143,6 +144,7 @@ export type MutationCreateCardArgs = {
 
 export type Query = {
    __typename?: 'Query';
+  all_users: Array<Maybe<User>>;
   users: Array<Maybe<User>>;
   user?: Maybe<User>;
   boards: Array<Maybe<Board>>;
@@ -277,9 +279,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
-  String: ResolverTypeWrapper<Scalars['String']>,
   User: ResolverTypeWrapper<User>,
   ID: ResolverTypeWrapper<Scalars['ID']>,
+  String: ResolverTypeWrapper<Scalars['String']>,
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>,
   Board: ResolverTypeWrapper<Omit<Board, 'team'> & { team?: Maybe<Array<Maybe<ResolversTypes['Team']>>> }>,
   Team: ResolversTypes['TeamWithMemberObj'] | ResolversTypes['TeamWithMemberID'],
@@ -296,9 +298,9 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {},
-  String: Scalars['String'],
   User: User,
   ID: Scalars['ID'],
+  String: Scalars['String'],
   DateTime: Scalars['DateTime'],
   Board: Omit<Board, 'team'> & { team?: Maybe<Array<Maybe<ResolversParentTypes['Team']>>> },
   Team: ResolversParentTypes['TeamWithMemberObj'] | ResolversParentTypes['TeamWithMemberID'],
@@ -367,6 +369,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  all_users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>,
   users?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType, RequireFields<QueryUsersArgs, never>>,
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>,
   boards?: Resolver<Array<Maybe<ResolversTypes['Board']>>, ParentType, ContextType>,

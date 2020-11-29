@@ -1,4 +1,5 @@
 type Query {
+    all_users: [User]!
     users(keyword: String): [User]!
     user(id: ID!): User
     boards: [Board]!
@@ -88,6 +89,7 @@ input CardInput {
     _id: ID!
     title: String!
     description: String
+    members: [ID]
     _created: DateTime
     _changed: DateTime
 }
